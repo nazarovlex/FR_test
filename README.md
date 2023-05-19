@@ -1,5 +1,9 @@
 # FR_test
 
+Fill conf.yaml:
+- your token: token
+- your time between checking the database for new mailings: check_base_rate
+
 To prepare project, execute next commands:
 - make build
 
