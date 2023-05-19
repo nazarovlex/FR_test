@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    restart: on-failure
+    ports:
+      - 5000:5000
+    networks:
+      - web
+    depends_on:
+      - mongo
+
+  sender:
+    environment:
+      - TZ=Europe/Moscow
+    build:
+      context: .
+      dockerfile: sender/Dockerfile.sender
+    restart: on-failure
+    networks:
+      - web
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.4
+    command: "mongod --dbpath /data/db"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=mongo
+      - MONGO_INITDB_ROOT_PASSWORD=mongo
+    ports:
+    - 27017:27017
+    networks:
+      - web
+    volumes:
+      - ./mongo/init/mongo-init.js:/docker-entrypoint-initdb.d/mongo-mongo-init.js:ro
+      - ./.artifacts/mongo/:/data/db
+
+networks:
+  web:
+    name: web
