@@ -18,3 +18,5 @@ To remove saved data and remove unused docker data:
 
 To restart project (build, start):
 - make restart
+
+For more info open swagger.yaml in root of app.
