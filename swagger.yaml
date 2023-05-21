@@ -1,0 +1,359 @@
+swagger: 2.0
+info:
+  title: Тестовое задание
+  description: API по тестовому заданию Fabrique
+  version: 1.0.0
+servers:
+  - url: https://127.0.0.1:5000
+
+paths:
+  /add_client:
+    post:
+      summary: обавление нового клиента
+      requestBody:
+        description: объект нового клиента
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+        required: true
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddClientResponse_200'
+          '400':
+            description: ошибка в запросе
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/AddClientResponse_400'
+
+  /update_client:
+    put:
+      summary: обновление данных существуещего клиента
+      requestBody:
+        description: объект обновленного клиента
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+        required: true
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateClientResponse_200'
+        '400':
+          description: ошибка в запросе
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateClientResponse_400'
+
+  /delete_client/{phone_number}:
+    delete:
+      summary: удаление клиента по номеру телефона
+      parameters:
+        - name: phone_number
+          in: path
+          description: Номер телефона клиента
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClientResponse_200'
+        '400':
+          description: Ошибка в запросе
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteClientResponse_400'
+
+  /add_mailing_list:
+    post:
+      summary: добавление новой рассылки
+      requestBody:
+        description: объект рассылки
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Mailing_list'
+        required: true
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddMailingListResponse_200'
+        '400':
+          description: ошибка в запросе
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddMailingListResponse_400'
+
+  /update_mailing_list:
+    put:
+      summary: удаление клиента по номеру телефона
+      requestBody:
+        description: объект обновленной рассылки с id
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Update_mailing_list'
+        required: true
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMailingListResponse_200'
+        '400':
+          description: ошибка в запросе
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpdateMailingListResponse_400'
+
+  /delete_mailing_list/{id}:
+    delete:
+      summary: удаление рассылки по id
+      parameters:
+        - name: id
+          in: path
+          description: id рассылки, кторую нужно удалить
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMailingListResponse_200'
+        '400':
+          description: ошибка в запросе
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeleteMailingListResponse_400'
+
+  /mails_stats:
+    get:
+      summary: вывод общей статистики по рассылкам и сообщениям
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailsStatsResponse_200'
+
+  /mail_stat/{mail_id}:
+    get:
+      summary: вывод общей статистики по рассылкам и сообщениям
+      parameters:
+        - name: mail_id
+          in: path
+          description: id рассылки, по которой нужна статистика
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: успешное выполнение
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailStatsResponse_200'
+        '400':
+          description: ошибка в запросе
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MailStatsResponse_400'
+
+components:
+  schemas:
+    AddClientResponse_200:
+      type: object
+        properties:
+          message:
+            type: string
+
+    AddClientResponse_400:
+      type: object
+        properties:
+          error:
+            type: string
+
+    UpdateClientResponse_200:
+      type: object
+        properties:
+          message:
+            type: string
+
+    UpdateClientResponse_400:
+      type: object
+        properties:
+          error:
+            type: string
+
+    DeleteClientResponse_200:
+      type: object
+        properties:
+          message:
+            type: string
+
+    DeleteClientResponse_400:
+      type: object
+        properties:
+          error:
+            type: string
+
+    AddMailingListResponse_200:
+      type: object
+        properties:
+          message:
+            type: string
+
+    AddMailingListResponse_400:
+      type: object
+        properties:
+          error:
+            type: string
+
+    UpdateMailingListResponse_200:
+      type: object
+        properties:
+          message:
+            type: string
+
+    UpdateMailingListResponse_400:
+      type: object
+        properties:
+          error:
+            type: string
+
+    DeleteMailingListResponse_200:
+      type: object
+        properties:
+          message:
+            type: string
+
+    DeleteMailingListResponse_400:
+      type: object
+        properties:
+          error:
+            type: string
+
+    MailsStatsResponse_200:
+      type: object
+        properties:
+          mailing_data:
+            type: object
+          messages_data:
+            type: object
+
+    MailStatsResponse_200:
+      type: object
+        properties:
+          mail:
+            type: object
+          messages_data:
+            type: object
+
+    MailStatsResponse_400:
+      type: object
+        properties:
+          error:
+            type: string
+
+
+    Client:
+      required:
+        - number
+        - operator
+        - tag
+        - time
+      type: object
+      properties:
+        number:
+          type: integer
+          description: номер телефона клиента
+        operator:
+          type: string
+          description: код оператора
+        tag:
+          type: string
+          description: тег клиента
+        time:
+          type: string
+          description: часовой пояс клиента
+
+    Mailing_list:
+      required:
+        - start
+        - text
+        - filter
+        - end
+        - sent
+      type: object
+      properties:
+        start:
+          type: string
+          description: время начала рассылки в формате "%d.%m.%Y %H:%M:%S"
+        text:
+          type: string
+          description: текст сообщения
+        filter:
+          type: string
+          description: тег, по которому будут выбираться клиенты для рассылки
+        end:
+          type: string
+          description: время конца рассылки в формате "%d.%m.%Y %H:%M:%S"
+        sent:
+          type: boolean
+          description: статус выполнения рассылки (изначально передаем False)
+
+    Update_mailing_list:
+      required:
+        - id
+        - start
+        - text
+        - filter
+        - end
+        - sent
+      type: object
+      properties:
+        id:
+          type: integer
+          description: id рассылки которую нужно изменить
+        start:
+          type: string
+          description: время начала рассылки в формате "%d.%m.%Y %H:%M:%S"
+        text:
+          type: string
+          description: текст сообщения
+        filter:
+          type: string
+          description: тег по которому будут выбираться клиенты для рассылки
+        end:
+          type: string
+          description: время конца рассылки в формате "%d.%m.%Y %H:%M:%S"
+        sent:
+          type: boolean
+          description: статус выполнения рассылки (изначально передаем False)
