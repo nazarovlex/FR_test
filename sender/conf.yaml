@@ -1,2 +1,2 @@
 token: ""
-check_base_rate: 30
+check_base_rate: 30 # seconds

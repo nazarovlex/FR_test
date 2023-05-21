@@ -4,8 +4,7 @@ build:
 
 .PHONY: start
 start:
-	sudo docker-compose up --no-attach mongo
-	#sudo docker-compose up
+	sudo docker-compose up
 
 .PHONY: stop
 stop:
@@ -18,6 +17,5 @@ clean:
 
 .PHONY: restart
 restart:
-	make clean
 	make build
 	make start

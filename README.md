@@ -16,5 +16,5 @@ To stop project execute:
 To remove saved data and remove unused docker data:
 - make clean
 
-To restart project (clean, build, start):
+To restart project (build, start):
 - make restart
