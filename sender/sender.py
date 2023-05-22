@@ -2,9 +2,11 @@ import pymongo
 import datetime
 import time
 import requests
-# import settings
-from conf import token, check_base_rate
-print(token)
+from conf import token, check_base_rate, log_level
+import logging
+
+logging.basicConfig(level=log_level)
+
 # headers and url for requests
 HEADERS = {
     "Authorization": f"Bearer {token}",
@@ -15,6 +17,7 @@ URL = "https://probe.fbrq.cloud/v1/send/"
 
 # init mongo
 def mongo_init():
+    logging.debug("mongo init")
     db_client = pymongo.MongoClient("mongodb://mongo:mongo@mongo:27017/?authMechanism=DEFAULT")
     distribution = db_client["distribution"]
     return distribution
@@ -37,6 +40,7 @@ def send(mailing_row):
             "text": mailing_row["message_text"]
         }
         try:
+            logging.debug(f"message with id:{msg_id} is going to send")
             response = requests.post(URL + str(msg_id), headers=HEADERS, json=json)
             if response.status_code != 200:
                 deliver_status = f"Not delivered, status code - {response.status_code}"
@@ -46,7 +50,7 @@ def send(mailing_row):
                 deliver_status = "Delivered"
         except requests.exceptions.ConnectionError:
             deliver_status = "Not delivered, message - connection aborted"
-
+        logging.debug(f"message with id:{msg_id} is {deliver_status}")
         # save in mongo messages
         message = {
             "id": msg_id,
@@ -65,10 +69,10 @@ while True:
     result = mailing_collection.find({"start_time": {"$lte": time_now}, "end_time": {"$gt": time_now}})
     for row in result:
         if not row["sent"]:
-            print(f"!!!!!!!!!!!!!!!!!!{row}")
+            logging.debug(f"sender start mailing {row}")
             send(row)
             filter_query = {"_id": row["_id"]}
             update_query = {"$set": {"sent": True}}
             mailing_collection.update_one(filter_query, update_query)
-
+    logging.debug("sender sleep")
     time.sleep(int(check_base_rate))

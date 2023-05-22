@@ -190,97 +190,97 @@ components:
   schemas:
     AddClientResponse_200:
       type: object
-        properties:
-          message:
-            type: string
+      properties:
+        message:
+          type: string
 
     AddClientResponse_400:
       type: object
-        properties:
-          error:
-            type: string
+      properties:
+        error:
+          type: string
 
     UpdateClientResponse_200:
       type: object
-        properties:
-          message:
-            type: string
+      properties:
+        message:
+          type: string
 
     UpdateClientResponse_400:
       type: object
-        properties:
-          error:
-            type: string
+      properties:
+        error:
+          type: string
 
     DeleteClientResponse_200:
       type: object
-        properties:
-          message:
-            type: string
+      properties:
+        message:
+          type: string
 
     DeleteClientResponse_400:
       type: object
-        properties:
-          error:
-            type: string
+      properties:
+        error:
+          type: string
 
     AddMailingListResponse_200:
       type: object
-        properties:
-          message:
-            type: string
+      properties:
+        message:
+          type: string
 
     AddMailingListResponse_400:
       type: object
-        properties:
-          error:
-            type: string
+      properties:
+        error:
+          type: string
 
     UpdateMailingListResponse_200:
       type: object
-        properties:
-          message:
-            type: string
+      properties:
+        message:
+          type: string
 
     UpdateMailingListResponse_400:
       type: object
-        properties:
-          error:
-            type: string
+      properties:
+        error:
+          type: string
 
     DeleteMailingListResponse_200:
       type: object
-        properties:
-          message:
-            type: string
+      properties:
+        message:
+          type: string
 
     DeleteMailingListResponse_400:
       type: object
-        properties:
-          error:
-            type: string
+      properties:
+        error:
+          type: string
 
     MailsStatsResponse_200:
       type: object
-        properties:
-          mailing_data:
-            type: object
-          messages_data:
-            type: object
+      properties:
+        mailing_data:
+          type: object
+        messages_data:
+          type: object
 
     MailStatsResponse_200:
       type: object
-        properties:
-          mail:
-            type: object
-          messages_data:
-            type: object
+      properties:
+        mail:
+          type: object
+        messages_data:
+          type: object
 
     MailStatsResponse_400:
       type: object
-        properties:
-          error:
-            type: string
+      properties:
+        error:
+          type: string
 
 
     Client:

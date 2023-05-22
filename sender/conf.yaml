@@ -1,2 +1,3 @@
 token: ""
 check_base_rate: 30 # seconds
+log_level: INFO
